@@ -1,5 +1,6 @@
 // File: login_screen.dart
 import 'package:flutter/material.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -94,7 +95,14 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       "Register",
                       style: TextStyle(color: Colors.blue),
