@@ -1,119 +1,104 @@
 // File: dashboard_screen.dart
 import 'package:flutter/material.dart';
+import 'profile_screen.dart';
 
-class DashboardScreen extends StatefulWidget {
-  @override
-  _DashboardScreenState createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 0;
-
+class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.grey[700],
         title: Text("Dashboard"),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: EdgeInsets.only(bottom: 16.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.grey[400],
-                        radius: 20,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "User Name",
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5, // Example item count
+              itemBuilder: (context, index) {
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfileScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Username ${index + 1}",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
-                          Text(
-                            "Timestamp",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "This is a sample post content. It can be updated dynamically.",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10),
+                        ),
+
+                        SizedBox(height: 8),
+
+                        Text(
+                          "This is the content of the post. Post ${index + 1}.",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                );
+              },
             ),
-          );
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: "Add",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notifications",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+          BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: "Search",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.notifications),
+                label: "Notifications",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
+              ),
+            ],
           ),
         ],
-        selectedItemColor: Colors.grey[700],
-        unselectedItemColor: Colors.grey[500],
-        type: BottomNavigationBarType.fixed,
+      ),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[700],
+        title: Text("User Profile"),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Text(
+          "User Profile Screen",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
