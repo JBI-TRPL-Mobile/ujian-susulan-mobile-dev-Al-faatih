@@ -1,4 +1,3 @@
-// File: dashboard_screen.dart
 import 'package:flutter/material.dart';
 import 'profile_screen.dart';
 
@@ -30,7 +29,9 @@ class DashboardScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProfileScreen(),
+                                builder: (context) => ProfileScreen(
+                                  username: "Username ${index + 1}",
+                                ),
                               ),
                             );
                           },
@@ -80,25 +81,6 @@ class DashboardScreen extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey[700],
-        title: Text("User Profile"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          "User Profile Screen",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
       ),
     );
   }

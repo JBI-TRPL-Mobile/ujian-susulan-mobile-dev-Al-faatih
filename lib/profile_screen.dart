@@ -18,16 +18,16 @@ class ProfileScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Profile Picture
               Center(
                 child: CircleAvatar(
-                  radius: 50,
+                  radius: 60,
                   backgroundColor: Colors.grey[400],
                   child: Icon(
                     Icons.person,
-                    size: 50,
+                    size: 60,
                     color: Colors.white,
                   ),
                 ),
@@ -36,25 +36,48 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: 20),
 
               // Username
-              Center(
-                child: Text(
-                  username,
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
-                  ),
+              Text(
+                username,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
                 ),
               ),
 
               SizedBox(height: 20),
 
+              // Chat Button
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to chat screen or implement chat functionality
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatScreen(username: username),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text("Chat"),
+              ),
+
+              SizedBox(height: 20),
+
               // Bio Section
-              Text(
-                "Bio:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Bio:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
 
@@ -68,11 +91,14 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: 20),
 
               // Posts Section
-              Text(
-                "Posts:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Posts:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
 
@@ -98,6 +124,29 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// Chat Screen Placeholder
+class ChatScreen extends StatelessWidget {
+  final String username;
+
+  ChatScreen({required this.username});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Chat with $username"),
+        backgroundColor: Colors.grey[700],
+      ),
+      body: Center(
+        child: Text(
+          "Chat functionality goes here.",
+          style: TextStyle(fontSize: 18),
         ),
       ),
     );
